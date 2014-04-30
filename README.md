@@ -17,7 +17,7 @@ Clean:
 >>> ant clean
 ```
 
-### What are meanings of each column in output files?
+### What are the meanings of each column in output files?
 
 NOTICE: The 1., 2., 3. means the row number in the file.
 
@@ -44,4 +44,5 @@ start node] [ID of end node] [Longitude of end node] [Latitude of end node]
 3.   ...
 
 Hengfeng Li
+
 Jun 14, 2013
