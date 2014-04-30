@@ -1,0 +1,2 @@
+java -cp ExtractGraph.jar -Xmx2g iways.map.PreProcessingMap melb.osm
+

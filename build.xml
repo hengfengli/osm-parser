@@ -1,0 +1,44 @@
+<!--
+/*************************************************************************
+ *  Copyright 2013, Hengfeng Li.
+ *
+ *  ExtractGraph.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  ExtractGraph.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with ExtractGraph.jar.  If not, see http://www.gnu.org/licenses.
+ *************************************************************************/
+-->
+<project name="ExtractGraph" default="ExtractGraph" basedir=".">
+
+  <description>ExtractGraph</description>
+
+  <property name="src" location="src" />
+  <property name="build" location="build" />
+  
+  <target name="init">
+    <tstamp />
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="ExtractGraph" depends="compile">
+    <jar jarfile="ExtractGraph.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}" />
+    <delete file="ExtractGraph.jar" />
+  </target>
+
+</project>

@@ -1,0 +1,4 @@
+build
+*.osm
+*.txt
+.DS_Store
