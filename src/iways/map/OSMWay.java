@@ -23,23 +23,25 @@ public class OSMWay {
 	private int level;                    // type of this way
 	private boolean isOneway = false;     // oneway?
 
-	public OSMWay(String id, List<String> refs, Map<String, String> tags) {
+	public OSMWay(String id, List<String> refs, Map<String, String> tags, int level) {
 		this.id = id;
 		this.refs = refs;
 		this.tags = tags;
 		
-		// classify different types of roads
-		// the split function is to handle with the case: "tertiary_link"
-		String[] labels = tags.get("highway").split("_");
-		String highway = labels[0];
-		
-		if      (highway.equals("motorway"))    { this.level = 1; }
-		else if (highway.equals("primary"))     { this.level = 2; }
-		else if (highway.equals("secondary"))   { this.level = 3; }
-		else if (highway.equals("tertiary"))    { this.level = 4; }
-		else if (highway.equals("trunk"))       { this.level = 5; }
-		else if (highway.equals("residential")) { this.level = 6; }
-		else                                    { this.level = 7; }
+        this.level = level;
+        
+        // // classify different types of roads
+        // // the split function is to handle with the case: "tertiary_link"
+        // String[] labels = tags.get("highway").split("_");
+        // String highway = labels[0];
+        // 
+        // if      (highway.equals("motorway"))    { this.level = 1; }
+        // else if (highway.equals("primary"))     { this.level = 2; }
+        // else if (highway.equals("secondary"))   { this.level = 3; }
+        // else if (highway.equals("tertiary"))    { this.level = 4; }
+        // else if (highway.equals("trunk"))       { this.level = 5; }
+        // else if (highway.equals("residential")) { this.level = 6; }
+        // else                                    { this.level = 7; }
 		
 		// check whether this way is one-way or not
 		String oneway = tags.get("oneway");

@@ -425,24 +425,43 @@ public class PreProcessingMap {
 			Map<String, String> tags = readTagMapFromOSMFile(item);
 			List<String> refs = readRefsOfWayFromOSMFile(item);
 
-			String highway = tags.get("highway");
-			String railway = tags.get("railway");
-			if (((highway != null) 
-			  && !highway.equals("footway")
-			  && !highway.equals("cycleway")
-			  && !highway.equals("pedestrian")
-			  // if want to only use primary streets, uncomment this 
-			  // condition. 				  
-			  // && !highway.equals("residential") 
-			  && !highway.equals("service") 
-			  && !highway.equals("unclassified") 
-		      && !highway.equals("platform")
-			  && !highway.equals("access_ramp")
-  		      && !highway.equals("steps")
-			  && !highway.equals("path"))) {
-			  // || ((railway != null) && !railway.equals("tram"))) {
-				osmWays.add(new OSMWay(wayID, refs, tags));
-			}
+            // String highway = tags.get("highway");
+            // String railway = tags.get("railway");
+            
+            if (tags.get("highway") == null) continue;
+            
+            String[] labels = tags.get("highway").split("_");
+            String highway = labels[0];
+            
+            int level = 0;
+            
+            if      (highway.equals("motorway"))    { level = 1; } 
+            else if (highway.equals("primary"))     { level = 2; } 
+            else if (highway.equals("secondary"))   { level = 3; } 
+            else if (highway.equals("tertiary"))    { level = 4; } 
+            else if (highway.equals("trunk"))       { level = 5; } 
+            else if (highway.equals("residential")) { level = 6; } 
+            
+            // if (((highway != null) 
+            //   && !highway.equals("footway")
+            //   && !highway.equals("cycleway")
+            //   && !highway.equals("pedestrian")
+            //   // if want to only use primary streets, uncomment this 
+            //   // condition.                   
+            //   // && !highway.equals("residential") 
+            //   && !highway.equals("service") 
+            //   && !highway.equals("unclassified") 
+            //               && !highway.equals("platform")
+            //   && !highway.equals("access_ramp")
+            //                 && !highway.equals("steps")
+            //   && !highway.equals("path"))) {
+            //   // || ((railway != null) && !railway.equals("tram"))) {
+            //     osmWays.add(new OSMWay(wayID, refs, tags));
+            // }
+            
+            if (level != 0) {
+			    osmWays.add(new OSMWay(wayID, refs, tags, level));
+            }
 		}
 
 		return osmWays;
