@@ -35,10 +35,10 @@ public class PreProcessingMap {
 	public static void load(String path) {
 		
 		try {
-            String vertexFilename = "vertex.txt";
-            String edgeFilename   = "edges.txt";
-            String streetFilename = "streets.txt";
-            boolean isDirected = true;
+            		String vertexFilename = "vertex.txt";
+            		String edgeFilename   = "edges.txt";
+            		String streetFilename = "streets.txt";
+            		boolean isDirected = true;
             
 			PreProcessingMap preProcessingMap = new PreProcessingMap();
 			
