@@ -76,9 +76,31 @@ public class PreProcessingMap {
 				edgeFilename);
 			System.out.println("streets size:" + streets.size());
 			
+			int[] indegrees  = new int[requiredNodes.size()];
+			int[] outdegrees = new int[requiredNodes.size()];
 			
-			// Output the adjacent list into file
-			// preProcessingMap.outputAdjacentList(requiredNodes);
+			for (int i = 0; i < requiredNodes.size(); i++) {
+				indegrees[i]  = 0;
+				outdegrees[i] = 0;
+			}
+			
+			for (int i = 0; i < streets.size(); i++) {
+				Street street = streets.get(i);
+				OSMNode startnode = street.getStartNode();
+				OSMNode endnode   = street.getEndNode();
+				
+				outdegrees[(int)startnode.getIndex()] += 1;
+				indegrees[(int)endnode.getIndex()] += 1;
+			}
+			
+			int count = 0;
+			for (int i = 0; i < requiredNodes.size(); i++) {
+				if (outdegrees[i] == 1 && indegrees[i] == 1) {
+					count += 1;
+				}
+			}
+			
+			System.out.println("redundant points:" + count);
 			
 			System.out.println("Building Graph - Done");
 			
